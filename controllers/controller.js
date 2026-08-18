@@ -1,6 +1,10 @@
 import playersRepo from "../repositorues/players.repo.js";
 import roundsRepo from "../repositorues/rounds.repo.js";
-import { raffle2Cards } from "../services/service.js";
+import {
+    getPlayerTotal,
+    rafflePairCards,
+    raffleCard,
+} from "../services/service.js";
 
 export async function createPlayer(_req, res) {
     const chips = +process.env.STARTING_CHIPS;
@@ -23,8 +27,8 @@ export async function createRound(req, res) {
         ThrowHttpException(409, "Conflict");
 
     const chips = await playersRepo.updateChips(playerId, -bet);
-    const playerCards = raffle2Cards();
-    const dealerCards = raffle2Cards();
+    const playerCards = rafflePairCards();
+    const dealerCards = rafflePairCards();
 
     const round = {
         playerId,
@@ -52,6 +56,25 @@ export async function getRound(/**@type {Request}) */ req, res) {
     } else {
         res.json({ round: null });
     }
+}
+
+export async function hit(req, res) {
+    const { id, chips } = req.player;
+    const round = await roundsRepo.getRoundByPlayerId(id);
+
+    if (!round) ThrowHttpException(404, "Not found");
+
+    const newCard = raffleCard();
+    let curRound = await roundsRepo.addCard(round.id, { playerCards: newCard });
+    const { playerCards } = curRound;
+
+    const playerTotal = getPlayerTotal(playerCards);
+    if (playerTotal > 21) {
+        curRound = await roundsRepo.updateStatus(round.id, "player_bust");
+    }
+    const { status } = curRound;
+
+    res.json({ playerCards, playerTotal, status, chips });
 }
 
 function ThrowHttpException(status, message) {

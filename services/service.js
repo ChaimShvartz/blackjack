@@ -29,3 +29,30 @@ export function raffleCard() {
     const suitPosition = Math.floor(randomNumber * SUITS.length);
     return { rank: RANKS[rankPosition], suit: SUITS[suitPosition] };
 }
+
+export function getPlayerTotal(cards) {
+    let aces = countAces(cards);
+    let handTotal = getTotal(cards);
+    if (handTotal > 21) {
+        for (; aces > 0; aces--) {
+            handTotal -= 10;
+            if (handTotal <= 21) break;
+        }
+    }
+    return handTotal;
+}
+
+function countAces(cards) {
+    return cards.reduce((acc, { rank }) => acc + (rank === "A"), 0);
+}
+
+function getTotal(cards) {
+    return cards.reduce((acc, { rank }) => {
+        const value = ["J", "Q", "K"].includes(rank)
+            ? 10
+            : rank === "A"
+              ? 11
+              : +rank;
+        return acc + value;
+    }, 0);
+}
