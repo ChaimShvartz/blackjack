@@ -15,13 +15,17 @@ const RANKS = [
 ];
 const SUITS = ["hearts", "diamonds", "clubs", "spades"];
 
-export function raffle2Cards() {
+export function rafflePairCards() {
     const cards = [];
     for (let i = 0; i < 2; i++) {
-        const randomNumber = Math.random()
-        const rankPosition = Math.floor(randomNumber * RANKS.length);
-        const suitPosition = Math.floor(randomNumber * SUITS.length);
-        cards.push({rank: RANKS[rankPosition], suit: SUITS[suitPosition]})
+        cards.push(raffleCard());
     }
-    return cards
+    return cards;
+}
+
+export function raffleCard() {
+    const randomNumber = Math.random();
+    const rankPosition = Math.floor(randomNumber * RANKS.length);
+    const suitPosition = Math.floor(randomNumber * SUITS.length);
+    return { rank: RANKS[rankPosition], suit: SUITS[suitPosition] };
 }
