@@ -18,7 +18,7 @@ export function createPlayersRepo(collection) {
     async function updsateChips(playerId, bet) {
         const { chips } = await collection.findOneAndUpdate(
             { _id: new ObjectId(playerId) },
-            { $inc: { chips: -bet } },
+            { $inc: { chips: bet } },
             { returnDocument: "after" },
         );
         return chips;
