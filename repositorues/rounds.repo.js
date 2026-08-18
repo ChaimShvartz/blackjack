@@ -10,16 +10,18 @@ export function createRoundsRepo(collection) {
     }
 
     async function getRoundByPlayerId(playerId) {
-        return collection.findOne({ playerId, status: "inProgress" });
+        const {_id, ...rest} = await collection.findOne({ playerId, status: "inProgress" }) || {};   
+        if(!_id) return      
+        return {id: _id.toString(), ...rest}
     }
 
     async function addCard(roundId, obj) {
-        const res = await collection.findOneAndUpdate(
+        const doc = await collection.findOneAndUpdate(
             { _id: new ObjectId(roundId) },
             { $push: obj },
             { returnDocument: "after" },
         );
-        return res;
+        return doc;
     }
 
     async function addCardToPlayer(roundId, card) {

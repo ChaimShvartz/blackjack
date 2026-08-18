@@ -9,10 +9,10 @@ export function createPlayersRepo(collection) {
         return insertedId.toString();
     }
 
-    async function getChips(playerId) {
-        const { chips } =
-            (await collection.findOne({ _id: new ObjectId(playerId) })) || {};
-        return chips;
+    async function getPlayer(playerId) {
+        const { _id, ...rest } = await collection.findOne({_id: new ObjectId(playerId)}) || {};
+        if(!_id) return
+        return { id: _id.toString(), ...rest };
     }
 
     async function updsateChips(playerId, bet) {
@@ -23,7 +23,7 @@ export function createPlayersRepo(collection) {
         );
         return chips;
     }
-    return { insertPlayer, updsateChips, getChips };
+    return { insertPlayer, updsateChips, getPlayer };
 }
 
 const playersRepo = createPlayersRepo(collection);
