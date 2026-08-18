@@ -10,7 +10,7 @@ export function createRoundsRepo(collection) {
     }
 
     async function getRoundByPlayerId(playerId) {
-        const {_id, ...rest} = await collection.findOne({ playerId, status: "inProgress" }) || {};   
+        const {_id, ...rest} = await collection.findOne({ playerId, status: "in_progress" }) || {};   
         if(!_id) return      
         return {id: _id.toString(), ...rest}
     }

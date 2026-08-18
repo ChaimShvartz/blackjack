@@ -6,6 +6,8 @@ import {
     createRound,
     getRound,
 } from "./controllers/controller.js";
+import { authentication } from "./middlewares.js";
+
 export const router = Router();
 
 router.get("/", (req, res) => {
@@ -13,7 +15,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/start-game", createPlayer);
-router.post("/start-round", createRound);
+router.post("/start-round", authentication, createRound);
 router.post("/hit", (req, res) => {});
 router.post("/stand", (req, res) => {});
 router.get("/my-round", getRound);

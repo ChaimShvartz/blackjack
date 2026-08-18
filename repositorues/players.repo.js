@@ -15,15 +15,15 @@ export function createPlayersRepo(collection) {
         return { id: _id.toString(), ...rest };
     }
 
-    async function updsateChips(playerId, bet) {
+    async function updateChips(playerId, amount) {
         const { chips } = await collection.findOneAndUpdate(
             { _id: new ObjectId(playerId) },
-            { $inc: { chips: bet } },
+            { $inc: { chips: amount } },
             { returnDocument: "after" },
         );
         return chips;
     }
-    return { insertPlayer, updsateChips, getPlayer };
+    return { insertPlayer, updateChips, getPlayer };
 }
 
 const playersRepo = createPlayersRepo(collection);
