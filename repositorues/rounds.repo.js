@@ -24,7 +24,7 @@ export function createRoundsRepo(collection) {
         return doc;
     }
 
-    function updateStatus(roundId, status) {
+    async function updateStatus(roundId, status) {
         collection.updateOne(
             { _id: new ObjectId(roundId) },
             { $set: { status } },
