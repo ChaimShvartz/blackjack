@@ -3,7 +3,7 @@ import db from "../db.js";
 
 const collection = db.collection("rounds");
 
-export function createRoundsRepo() {
+export function createRoundsRepo(collection) {
     async function insertRound(round) {
         const { insertedId } = await collection.insertOne(round);
         return insertedId.toString();
@@ -33,13 +33,20 @@ export function createRoundsRepo() {
     }
 
     function updateStatus(roundId, status) {
-        collection.updateOne({_id: new ObjectId(roundId)}, {$set:{status}})
+        collection.updateOne(
+            { _id: new ObjectId(roundId) },
+            { $set: { status } },
+        );
     }
-    return { insertRound, addCardToPlayer, addCardToDealer, getRoundByPlayerId, updateStatus };
+    return {
+        insertRound,
+        addCardToPlayer,
+        addCardToDealer,
+        getRoundByPlayerId,
+        updateStatus,
+    };
 }
 
-const demo = createRoundsRepo()
-// await demo.insertRound({playerId: 5, status: 'inProgress'})
+const roundsRepo = createRoundsRepo(collection);
 
-
-console.log(await demo.updateStatus('6a84542fa8a9154b18821144', 'test'))
+export default roundsRepo;
