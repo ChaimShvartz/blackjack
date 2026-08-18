@@ -3,7 +3,7 @@ import roundsRepo from "../repositorues/rounds.repo.js";
 import { raffle2Cards } from "../services/service.js";
 
 export async function createPlayer(_req, res) {
-    const chips = process.env.STARTING_CHIPS;
+    const chips = +process.env.STARTING_CHIPS;
     const newPlayer = {
         chips,
         createdAt: new Date().toLocaleDateString("he-IL"),
@@ -22,7 +22,7 @@ export async function createRound(req, res) {
     if (await roundsRepo.getRoundByPlayerId(playerId))
         ThrowHttpException(409, "Conflict");
 
-    const remainChips = await playersRepo.updateChips(playerId, -bet);
+    const chips = await playersRepo.updateChips(playerId, -bet);
     const playerCards = raffle2Cards();
     const dealerCards = raffle2Cards();
 
@@ -39,7 +39,7 @@ export async function createRound(req, res) {
         roundId,
         playerCards,
         dealerUpCard: dealerCards[0],
-        remainChips,
+        chips,
     });
 }
 
