@@ -24,16 +24,6 @@ export function createRoundsRepo(collection) {
         return doc;
     }
 
-    async function addCardToPlayer(roundId, card) {
-        const { playerCards } = await addCard(roundId, { playerCards: card });
-        return playerCards;
-    }
-
-    async function addCardToDealer(roundId, card) {
-        const { dealerCards } = addCard(roundId, { dealerCards: card });
-        return dealerCards;
-    }
-
     function updateStatus(roundId, status) {
         collection.updateOne(
             { _id: new ObjectId(roundId) },
@@ -42,8 +32,7 @@ export function createRoundsRepo(collection) {
     }
     return {
         insertRound,
-        addCardToPlayer,
-        addCardToDealer,
+        addCard,
         getRoundByPlayerId,
         updateStatus,
     };
