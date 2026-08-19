@@ -13,7 +13,7 @@ const RANKS = [
     "K",
     "A",
 ];
-const SUITS = ["hearts", "diamonds", "clubs", "spades"];
+const SUITS = ["hearts", "diamonds", "clubs", "spades"]; 
 
 export function rafflePairCards() {
     const cards = [];
@@ -30,13 +30,13 @@ export function raffleCard() {
     return { rank: RANKS[rankPosition], suit: SUITS[suitPosition] };
 }
 
-export function getPlayerTotal(cards) {
+export function getHandTotal(cards) {
     let aces = countAces(cards);
     let handTotal = getTotal(cards);
     if (handTotal > 21) {
-        for (; aces > 0; aces--) {
+        for (; aces > 0 && handTotal > 21; aces--) {
             handTotal -= 10;
-            if (handTotal <= 21) break;
+            // if (handTotal <= 21) break;
         }
     }
     return handTotal;
@@ -56,3 +56,4 @@ function getTotal(cards) {
         return acc + value;
     }, 0);
 }
+

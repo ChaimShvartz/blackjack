@@ -4,7 +4,9 @@ import roundsRepo from "./repositorues/rounds.repo.js";
 import {
     createPlayer,
     createRound,
-    getRound, hit
+    getRound,
+    hit,
+    stand,
 } from "./controllers/controller.js";
 import { authentication } from "./middlewares.js";
 
@@ -17,5 +19,5 @@ router.get("/", (req, res) => {
 router.post("/start-game", createPlayer);
 router.post("/start-round", authentication, createRound);
 router.post("/hit", authentication, hit);
-router.post("/stand", (req, res) => {});
+router.post("/stand", authentication, stand);
 router.get("/my-round", getRound);
