@@ -1,11 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
-</head>
-<body>
-    
-</body>
+<!doctype html>
+<html lang="he" dir="rtl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Blackjack</title>
+        <link rel="stylesheet" href="./style.css" />
+        <script src="./script.js"></script>
+    </head>
+    <body>
+        <header>
+            <img src="" alt="" />
+            <h3></h3>
+            <img src="" alt="" />
+        </header>
+        <main>
+            <section id="opening-page">
+                <label for="betInput"></label>
+                <input type="number" id="bet-input" />
+                <button type="submit" id="send-bet-btn"></button>
+                <article class="remain-chips">
+                    <p id="remain-chips-title"></p>
+                    <h6 id="remain-chips-amount"></h6>
+                </article>
+            </section>
+            <section id="game-page">
+                <header>
+                    <article class="remain-chips">
+                        <p id="remain-chips-title"></p>
+                        <h6 id="remain-chips-amount"></h6>
+                    </article>
+                </header>
+                <article id="dealer-cards-container"></article>
+                <article id="buttons-container">
+                    <button type="submit" id="hit-btn"></button>
+                    <button type="submit" id="stand-btn"></button>
+                </article>
+
+                <h6 id="player-cards-total"></h6>
+                <article id="player-cards-container"></article>
+            </section>
+            <!-- <section id="results-page"></section> -->
+        </main>
+    </body>
 </html>
