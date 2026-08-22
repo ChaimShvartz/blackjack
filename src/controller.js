@@ -1,10 +1,10 @@
-import playersRepo from "./repositorues/players.repo.js";
-import roundsRepo from "./repositorues/rounds.repo.js";
+import playersRepo from "./repositories/players.repo.js";
+import roundsRepo from "./repositories/rounds.repo.js";
 import {
     getHandTotal,
     rafflePairCards,
     raffleCard,
-} from "./service.js";
+} from "./services.js";
 
 export async function createPlayer(_req, res) {
     const chips = +process.env.STARTING_CHIPS;

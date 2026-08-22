@@ -1,6 +1,6 @@
 import { Router } from "express";
-import playersRepo from "./repositorues/players.repo.js";
-import roundsRepo from "./repositorues/rounds.repo.js";
+import playersRepo from "./repositories/players.repo.js";
+import roundsRepo from "./repositories/rounds.repo.js";
 import {
     createPlayer,
     createRound,

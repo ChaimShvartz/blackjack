@@ -1,4 +1,4 @@
-import playersRepo from "./repositorues/players.repo.js";
+import playersRepo from "./repositories/players.repo.js";
 
 export async function authentication(req, res, next) {
     const playerId = req.headers["x-player-id"];    
