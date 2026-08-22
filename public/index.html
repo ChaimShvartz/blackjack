@@ -5,41 +5,70 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Blackjack</title>
         <link rel="stylesheet" href="./style.css" />
-        <script src="./script.js"></script>
+        <script src="./script.js" defer type="module"></script>
     </head>
     <body>
         <header>
-            <img src="" alt="" />
-            <h3></h3>
-            <img src="" alt="" />
+            <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-okCpT7S0QjxznoHUKspxCtf-_kJCQ5JZJ5Dhl6T4MA&s=10"
+                alt=""
+                class="logo"
+            />
+            <h1 id="main-title">Blackjack</h1>
+            <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-okCpT7S0QjxznoHUKspxCtf-_kJCQ5JZJ5Dhl6T4MA&s=10"
+                alt=""
+                class="logo"
+            />
         </header>
         <main>
             <section id="opening-page">
-                <label for="betInput"></label>
-                <input type="number" id="bet-input" />
-                <button type="submit" id="send-bet-btn"></button>
-                <article class="remain-chips">
-                    <p id="remain-chips-title"></p>
-                    <h6 id="remain-chips-amount"></h6>
+                <article>
+                    <label for="bet-input">הזן את הסכום שברצונך להמר</label>
+                    <input type="number" id="bet-input" />
+                    <p
+                        class="error-message"
+                        id="invalid-amount-msg"
+                    ></p>
+                    <button type="submit" id="send-bet-btn">התחל משחק</button>
+                </article>
+                <article id="remain-chips-box">
+                    <p  id="remain-chips-title">יתרה נוכחית:</p>
+                    <h2 id="remain-chips"></h2>
                 </article>
             </section>
             <section id="game-page">
-                <header>
-                    <article class="remain-chips">
-                        <p id="remain-chips-title"></p>
-                        <h6 id="remain-chips-amount"></h6>
-                    </article>
-                </header>
-                <article id="dealer-cards-container"></article>
+                <article id="header-title">
+                    <div class="stat-box" id="bet-box">
+                        <p>הימור נוכחי</p>
+                        <h2 id="bet"></h2>
+                    </div>
+                </article>
+                <h3 class="player-name">דילר</h3>
+                <article
+                    class="cards-container"
+                    id="dealer-cards-container"
+                ></article>
                 <article id="buttons-container">
-                    <button type="submit" id="hit-btn"></button>
-                    <button type="submit" id="stand-btn"></button>
+                    <button type="submit" class="game" id="hit-btn">הכה</button>
+                    <button type="submit" class="game" id="stand-btn">
+                        עמוד
+                    </button>
+                    <button
+                        type="submit"
+                        class="result"
+                        id="start-new-round-btn"
+                    >
+                        התחל סיבוב חדש
+                    </button>
                 </article>
 
-                <h6 id="player-cards-total"></h6>
-                <article id="player-cards-container"></article>
+                <article
+                    class="cards-container"
+                    id="player-cards-container"
+                ></article>
+                <h3 class="player-name">אתה</h3>
             </section>
-            <!-- <section id="results-page"></section> -->
         </main>
     </body>
 </html>
